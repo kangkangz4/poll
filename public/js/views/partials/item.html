@@ -1,0 +1,50 @@
+<div class="page-header">
+  <h1>投票信息</h1>
+</div>
+<div class="well well-lg">
+  <strong>详细信息</strong><br>{{poll.question}}
+</div>
+<div ng-hide="poll.userVoted">
+  <p class="lead">请选择以下一个选项</p>
+  <form role="form" ng-submit="vote()">
+    <div ng-repeat="choice in poll.choices" class="radio">
+      <label>
+        <input type="radio" name="choice" ng-model="poll.userVote" value="{{choice._id}}">{{choice.text}}
+      </label>
+    </div>
+    <p><hr></p>
+    <div class="row">
+      <div class="col-xs-6">
+        <a href="#/polls" class="btn btn-default" role="button"><span class="glyphicon glyphicon-arrow-left"></span> 返回</a>
+      </div>
+      <div class="col-xs-6">
+        <button class="btn btn-primary pull-right" type="submit">投票 &raquo;</button>
+      </div>
+    </div>
+  </form>
+</div>
+<div ng-show="poll.userVoted">
+  <table class="result-table">
+    <tbody>
+      <tr ng-repeat="choice in poll.choices">
+        <td>{{choice.text}}</td>
+        <td>
+          <table style="width: {{choice.votes.length/poll.totalVotes*100}}%;">
+            <tr><td>{{choice.votes.length}}</td></tr>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>  
+  <p>
+    <em>共投了{{poll.totalVotes}}票. 
+      <span ng-show="poll.userChoice">你投了
+        <strong>{{poll.userChoice.text}}</strong>.
+      </span>
+    </em>
+  </p>
+  <p><hr></p>
+  <p><a href="#/polls" class="btn btn-default" role="button">
+  <span class="glyphicon glyphicon-arrow-left"></span> 返回列表</a></p>
+</div>
+<p>&nbsp;</p>
