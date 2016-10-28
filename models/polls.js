@@ -1,15 +1,17 @@
+'use strict'
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-
+//投票IP
 var voteSchema = new Schema({
 	ip: String
 });
-
+//选项
 var choiceSchema = new Schema({
 	text: String,
 	votes: [voteSchema]
 });
-
+//投票详细信息
 var pollSchema = new Schema({
 	question: {
 		type: String,
